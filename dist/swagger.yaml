@@ -1,15 +1,597 @@
-{
-    "openapi": "3.0.1",
-    "info": {
-        "title": "OpenAPI definition",
-        "version": "v0"
-    },
-    "servers": [
-        {
-            "url": "http://localhost:8080",
-            "description": "Generated server url"
-        }
-    ],
-    "paths": {},
-    "components": {}
-}
+openapi: "3.0.3"
+info:
+  title: "FreeBox"
+  description: "API utilizada pela ferramenta"
+  version: "1.0.0"
+servers:
+  - url: "https://freebox.com"
+paths:
+  /api/v1/agendamento/{id}:
+    put:
+      summary: "PUT api/v1/agendamento/{id}"
+      operationId: "updateAgendamento"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgendamentoModel"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AgendamentoModel"
+    delete:
+      summary: "DELETE api/v1/agendamento/{id}"
+      operationId: "deleteAgendamento"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+    get:
+      summary: "GET api/v1/agendamento/{id}"
+      operationId: "getAgendamentoById"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AgendamentoModel"
+  /api/v1/agendamento/completed/{id}:
+    put:
+      summary: "PUT api/v1/agendamento/completed/{id}"
+      operationId: "updateAgendamentoCompleted"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AgendamentoModel"
+  /api/v1/agendamento/cancel/{id}:
+    put:
+      summary: "PUT api/v1/agendamento/cancel/{id}"
+      operationId: "updateAgendamentoCanceled"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AgendamentoModel"
+  /api/v1/agendamento/Avaliar/{id}:
+    put:
+      summary: "PUT api/v1/agendamento/Avaliar/{id}"
+      operationId: "updateAgendamentoAvaliar"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "integer"
+              format: "int64"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AgendamentoModel"
+  /api/v1/agendamento:
+    post:
+      summary: "POST api/v1/agendamento"
+      operationId: "saveAgendamento"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgendamentoModel"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AgendamentoModel"
+    get:
+      summary: "GET api/v1/agendamento"
+      operationId: "getAllAgendamento"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/AgendamentoModel"
+  /api/v1/agendamentos/cliente/{id_user}:
+    get:
+      summary: "GET api/v1/agendamentos/cliente/{id_user}"
+      operationId: "getAllAgendamentosByCliente"
+      parameters:
+        - name: "id_user"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/AgendamentoModel"
+  /api/v1/estabelecimento/{id}:
+    put:
+      summary: "PUT api/v1/estabelecimento/{id}"
+      operationId: "updateEstabelecimento"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EstabelecimentoModel"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/EstabelecimentoModel"
+    delete:
+      summary: "DELETE api/v1/estabelecimento/{id}"
+      operationId: "deleteEstabelecimento"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+    get:
+      summary: "GET api/v1/estabelecimento/{id}"
+      operationId: "getEstabelecimentoById"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/EstabelecimentoModel"
+  /api/v1/estabelecimento:
+    post:
+      summary: "POST api/v1/estabelecimento"
+      operationId: "saveEstabelecimento"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EstabelecimentoModel"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/EstabelecimentoModel"
+    get:
+      summary: "GET api/v1/estabelecimento"
+      operationId: "getAllEstabelecimento"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/EstabelecimentoModel"
+  /api/v1/estabelecimento/find/{name}:
+    get:
+      summary: "GET api/v1/estabelecimento/find/{name}"
+      operationId: "getEstabelecimentoByName"
+      parameters:
+        - name: "name"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/EstabelecimentoModel"
+  /api/v1/estabelecimento/responsible/{id_responsible}:
+    get:
+      summary: "GET api/v1/estabelecimento/responsible/{id_responsible}"
+      operationId: "getEstabelecimentoByResponsible"
+      parameters:
+        - name: "id_responsible"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/EstabelecimentoModel"
+  /api/v1/servico/{id}:
+    put:
+      summary: "PUT api/v1/servico/{id}"
+      operationId: "updateServico"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServicoModel"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ServicoModel"
+    delete:
+      summary: "DELETE api/v1/servico/{id}"
+      operationId: "deleteServico"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+    get:
+      summary: "GET api/v1/servico/{id}"
+      operationId: "getServicoById"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ServicoModel"
+  /api/v1/servico/inactive/{id}:
+    put:
+      summary: "PUT api/v1/servico/inactive/{id}"
+      operationId: "updateServicoInactive"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ServicoModel"
+  /api/v1/servico/active/{id}:
+    put:
+      summary: "PUT api/v1/servico/active/{id}"
+      operationId: "updateServicoActive"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ServicoModel"
+  /api/v1/servico:
+    post:
+      summary: "POST api/v1/servico"
+      operationId: "saveServico"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServicoModel"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ServicoModel"
+  /api/v1/servicos:
+    get:
+      summary: "GET api/v1/servicos"
+      operationId: "getAllServicos"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/ServicoModel"
+  /api/v1/servico/find/{nome}:
+    get:
+      summary: "GET api/v1/servico/find/{nome}"
+      operationId: "getServicoByNomeIgnoreCase"
+      parameters:
+        - name: "nome"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/ServicoModel"
+  /api/v1/servico/getActiveServices/{idEstabelecimento}:
+    get:
+      summary: "GET api/v1/servico/getActiveServices/{idEstabelecimento}"
+      operationId: "getActiveServicesByIdBarber"
+      parameters:
+        - name: "idEstabelecimento"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/ServicoModel"
+  /api/v1/user:
+    post:
+      summary: "POST api/v1/user"
+      operationId: "saveUser"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserModel"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserModel"
+  /api/v1/user/{name}:
+    delete:
+      summary: "DELETE api/v1/user/{name}"
+      operationId: "deleteUser"
+      parameters:
+        - name: "name"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+  /api/v1/users:
+    get:
+      summary: "GET api/v1/users"
+      operationId: "getAllUser"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/UserModel"
+  /api/v1/auth/login:
+    get:
+      summary: "GET api/v1/auth/login"
+      operationId: "loginByEmailAndPassword"
+      parameters:
+        - name: "email"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+        - name: "password"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserModel"
+components:
+  schemas:
+    UserModel:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        email:
+          type: "string"
+        password:
+          type: "string"
+        numberCellphone:
+          type: "string"
+        cpf:
+          type: "string"
+        birthDate:
+          type: "string"
+          format: "date-time"
+    EstabelecimentoModel:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        cnpj:
+          type: "string"
+        address:
+          type: "string"
+        numberCellphone:
+          type: "string"
+        responsible:
+          $ref: "#/components/schemas/UserModel"
+    ServicoModel:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        nome:
+          type: "string"
+        preco:
+          type: "integer"
+          format: "int64"
+        inativo:
+          type: "boolean"
+        businessService:
+          $ref: "#/components/schemas/EstabelecimentoModel"
+    AgendamentoModel:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        startService:
+          type: "string"
+          format: "date-time"
+        serviceCompleted:
+          type: "string"
+          format: "date-time"
+        avaliacao:
+          type: "integer"
+          format: "int64"
+        client:
+          $ref: "#/components/schemas/UserModel"
+        service:
+          $ref: "#/components/schemas/ServicoModel"
+        businessService:
+          $ref: "#/components/schemas/EstabelecimentoModel"
+        status:
+          type: "string"
+          enum:
+            - "PENDENTE"
+            - "CANCELADO"
+            - "CONCLUIDO"
