@@ -1,0 +1,53 @@
+package com.freebox.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.Serializable;
+import java.util.Date;
+
+@Getter
+@Setter
+@Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
+@Table(name = "agendamento")
+public class AgendamentoModel implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name = "id", unique = true, nullable = false)
+    private long id;
+
+    @Column(name = "agendado", unique = false, nullable = false)
+    private Date startService;
+
+    @Column(name = "realizado", unique = false, nullable = true)
+    private Date serviceCompleted;
+
+    @Column(name = "avaliacao", unique = false, nullable = true)
+    private long avaliacao;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
+    private UserModel client;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JoinColumn(name = "id_servico", referencedColumnName = "id")
+    private ServicoModel service;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JoinColumn(name = "id_estabelecimento", referencedColumnName = "id")
+    private EstabelecimentoModel businessService;
+
+    @Enumerated(value = EnumType.STRING)
+    private Status status;
+
+
+}
